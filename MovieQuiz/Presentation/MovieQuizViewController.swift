@@ -67,6 +67,8 @@ final class MovieQuizViewController: UIViewController {
         ]
     
     
+    @IBOutlet weak var noButton: UIButton!
+    @IBOutlet weak var yesButton: UIButton!
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var textLabel: UILabel!
     @IBOutlet weak private var counterLabel: UILabel!
@@ -81,12 +83,20 @@ final class MovieQuizViewController: UIViewController {
         show(quiz: convert(model: questions[currentQuestionIndex]))
     }
     
+    // Toggle between enabled and disabled
+    private func toggleButtonStatus() {
+        noButton.isEnabled = !noButton.isEnabled
+        yesButton.isEnabled = !yesButton.isEnabled
+    }
+    
     @IBAction private func yesButtonTapped(_ sender: UIButton) {
+        toggleButtonStatus()
         questions[currentQuestionIndex].correctAnswer ? showAnswerResult(isCorrect: true) : showAnswerResult(isCorrect: false)
         
     }
     
     @IBAction private func noButtonTapped(_ sender: UIButton) {
+        toggleButtonStatus()
         questions[currentQuestionIndex].correctAnswer == false ? showAnswerResult(isCorrect: true) : showAnswerResult(isCorrect: false)
         
     }
@@ -137,6 +147,7 @@ final class MovieQuizViewController: UIViewController {
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.toggleButtonStatus()
             self.imageView.layer.borderColor = UIColor.clear.cgColor
             self.showNextQuestionOrResults()
         }
