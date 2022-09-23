@@ -80,6 +80,7 @@ final class MovieQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .ypBackground
+        imageView.contentMode = .scaleToFill
         show(quiz: convert(model: questions[currentQuestionIndex]))
     }
     
