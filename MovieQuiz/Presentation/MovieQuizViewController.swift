@@ -84,6 +84,7 @@ final class MovieQuizViewController: UIViewController {
         show(quiz: convert(model: questions[currentQuestionIndex]))
     }
     
+    // Mетод для блокировки и разблокировки кнопок ответа
     // Toggle between enabled and disabled
     private func toggleButtonStatus() {
         noButton.isEnabled = !noButton.isEnabled
